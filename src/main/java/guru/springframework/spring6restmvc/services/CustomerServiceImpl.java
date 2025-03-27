@@ -66,4 +66,19 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> customerList() {
         return new ArrayList<>(fakeCustomersList.values());
     }
+
+    @Override
+    public Customer saveNewCustomer(Customer customer) {
+
+        Customer newCustomer =  Customer.builder()
+                .id(UUID.randomUUID())
+                .customerName(customer.getCustomerName())
+                .version(customer.getVersion())
+                .createdDate(LocalDateTime.now())
+                .lastModifiedDate(LocalDateTime.now())
+                .build();
+
+        fakeCustomersList.put(newCustomer.getId(), newCustomer);
+        return newCustomer;
+    }
 }
